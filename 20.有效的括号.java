@@ -60,29 +60,30 @@ import java.util.Stack;
 // @lc code=start
 class Solution {
     public boolean isValid(String s) {
+        if (s == null)
+            return false;
         Stack<Character> stack = new Stack<>();
 
         for (int i = 0; i < s.length(); i++) {
-            Character tmp = s.charAt(i);
-            switch (tmp) {
+            char ch = s.charAt(i);
+            switch (ch) {
                 case '(':
                     stack.push(')');
-                    break;
-                case '[':
-                    stack.push(']');
                     break;
                 case '{':
                     stack.push('}');
                     break;
+                case '[':
+                    stack.push(']');
+                    break;
                 default:
-                    if (stack.isEmpty() || s.charAt(i) != stack.pop()) {
+                    if (stack.isEmpty() || ch != stack.pop()) {
                         return false;
                     }
                     break;
             }
         }
         return stack.isEmpty();
-
     }
 }
 // @lc code=end

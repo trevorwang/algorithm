@@ -71,17 +71,20 @@
 // @lc code=start
 class Solution {
     public int romanToInt(String s) {
-        int sum = 0;
-        int preNum = 0;
+        if (s == null)
+            return 0;
+        int ans = 0;
+        int preVal = 0;
         for (int i = 0; i < s.length(); i++) {
-            int num = getValue(s.charAt(i));
-            if (preNum < num) {
-                sum -= preNum * 2;
+            int value = getValue(s.charAt(i));
+            ans += value;
+            if (preVal < value) {
+                ans -= preVal * 2;
             }
-            preNum = num;
-            sum += num;
+            preVal = value;
         }
-        return sum;
+
+        return ans;
     }
 
     private int getValue(char ch) {
