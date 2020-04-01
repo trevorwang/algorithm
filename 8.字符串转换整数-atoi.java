@@ -72,8 +72,43 @@
 // @lc code=start
 class Solution {
     public int myAtoi(String str) {
+        if (str == null)
+            return 0;
+        int max = Integer.MAX_VALUE / 10;
+        int flag = 1;
+        int ans = 0;
+        int i = 0;
+        int len = str.length();
 
+        while (i < len && str.charAt(i) == ' ') { // 去除空格
+            i++;
+        }
+        if (i == len)
+            return 0;
+
+        if (str.charAt(i) == '-') // 检查是否负数
+            flag = -1;
+        if (str.charAt(i) == '-' || str.charAt(i) == '+')
+            i++;
+
+        while (i < len) {
+            char ch = str.charAt(i);
+            if (ch > '9' || ch < '0') // 检查是否数字
+                break;
+            int value = (ch - '0'); // 获取世界数值
+
+            if (flag < 0 && (ans > max || (ans == max && value > 8))) {
+                return Integer.MIN_VALUE;
+            }
+
+            if (flag > 0 && (ans > max || (ans == max && value > 7))) {
+                return Integer.MAX_VALUE;
+            }
+
+            ans = ans * 10 + value;
+            i++;
+        }
+        return ans * flag;
     }
 }
 // @lc code=end
-
