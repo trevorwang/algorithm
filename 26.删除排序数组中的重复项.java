@@ -9,11 +9,12 @@ class Solution {
     public int removeDuplicates(int[] nums) {
         if (nums == null || nums.length == 0)
             return 0;
-        int p = 0, q = 1;
-        for (; q < nums.length; q++) {
+
+        int p = 0;
+        for (int q = 1; q < nums.length; q++) {
             if (nums[p] != nums[q]) {
                 p++;
-                if (q - p > 0) { // 有重复才会进行数组复制
+                if (q > p) {
                     nums[p] = nums[q];
                 }
             }
