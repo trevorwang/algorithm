@@ -15,25 +15,23 @@ class Solution {
         ListNode dummy = new ListNode(Integer.MIN_VALUE);
         ListNode pre = dummy;
         ListNode cur = head;
-        ListNode tail = null;
+        ListNode tail = dummy;
         while (cur != null) {
-            if (tail != null && tail.val < cur.val) {
+            if (tail.val < cur.val) {
                 tail.next = cur;
                 tail = cur;
                 cur = cur.next;
             } else {
-
                 ListNode next = cur.next;
                 while (pre.next != null && pre.next.val < cur.val)
                     pre = pre.next;
                 cur.next = pre.next;
                 pre.next = cur;
-                tail = cur;
+                tail.next = next;
                 pre = dummy;
                 cur = next;
             }
         }
-
         return dummy.next;
     }
 }
